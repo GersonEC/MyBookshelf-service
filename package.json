@@ -26,6 +26,10 @@
     "fluent-json-schema": "^4.1.0"
   },
   "devDependencies": {
-    "tap": "^16.1.0"
+    "@types/node": "^18.15.5",
+    "prisma": "^4.11.0",
+    "tap": "^16.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   }
 }
