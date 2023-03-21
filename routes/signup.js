@@ -8,10 +8,10 @@ export default async function signup(fastify, opts) {
     method: 'POST',
     path: '/signup',
     schema: {
-      body: S.string(),
-        // .additionalProperties(false)
-        // .prop('email', S.string().required())
-        // .prop('password', S.string().required()),
+      // body: S.object()
+      //   .additionalProperties(false)
+      //   .prop('email', S.string().required())
+      //   .prop('password', S.string().required()),
       response: {
         201: S.object()
           .prop('id', S.string())
@@ -24,18 +24,13 @@ export default async function signup(fastify, opts) {
 
   async function onSignup(req, reply) {
     const body = JSON.parse(req.body);
-    console.log("####     BODY  ######: ", body)
     const { email, password } = body;
-    console.log("####     email  ######: ", email)
-    console.log("####     password  ######: ", password)
-
     const user = await prisma.user.create({
       data: {
         email,
         password,
       },
     });
-
     return user;
   }
 }

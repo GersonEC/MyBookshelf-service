@@ -10,101 +10,6 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-
-// type Doc {
-//   isAvailable  Boolean
-//   acsTokenLink String
-// }
-
-// type AccessInfo {
-//   accessViewStatus       String?
-//   country                String?
-//   embeddable             Boolean?
-//   epub                   Doc?
-//   pdf                    Doc?
-//   publicDomain           Boolean?
-//   quoteSharingAllowed    Boolean?
-//   textToSpeechPermission String?
-//   viewability            String?
-//   webReaderLink          String?
-// }
-
-// type Price {
-//   amount       Float?
-//   currencyCode String?
-// }
-
-// type SaleInfo {
-//   country     String?
-//   isEbook     Boolean?
-//   saleability String?
-//   onSaleDate  DateTime?
-//   listPrice   Price?
-//   retailPrice Price?
-//   buyLink     String?
-// }
-
-// type ImageLinks {
-//   smallThumbnail String?
-//   thumbnail      String?
-//   extraLarge     String?
-//   large          String?
-//   medium         String?
-//   small          String?
-// }
-
-// type IndustryIdentifier {
-//   type       String?
-//   identifier String?
-// }
-
-// type ReadingModes {
-//   text  Boolean?
-//   image Boolean?
-// }
-
-// type PanelizationSummary {
-//   containsEpubBubbles  Boolean?
-//   containsImageBubbles Boolean?
-// }
-
-// type Dimenions {
-//   height    String?
-//   width     String?
-//   thickness String?
-// }
-
-// type VolumeInfo {
-//   allowAnonLogging    Boolean?
-//   authors             String[]
-//   averageRating       Int?
-//   canonicalVolumeLink String?
-//   categories          String[]
-//   contentVersion      String?
-//   description         String?
-//   dimensions          Dimenions?
-//   imageLinks          ImageLinks
-//   industryIdentifiers IndustryIdentifier[]
-//   infoLink            String?
-//   language            String?
-//   maturityRating      String?
-//   mainCategory        String?
-//   pageCount           Int?
-//   panelizationSummary PanelizationSummary?
-//   previewLink         String?
-//   printType           String?
-//   publishedDate       String?
-//   publisher           String?
-//   ratingsCount        Int?
-//   readingModes        ReadingModes?
-//   subtitle            String?
-//   title               String?
-// }
-
-// type SearchInfo {
-//   textSnippet String?
-// }
-
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -115,17 +20,26 @@ model User {
   updatedAt DateTime @default(now())
 }
 
-// model Book {
-//   id         String     @id @map("_id")
-//   accessInfo AccessInfo
-//   etag       String
-//   kind       String
-//   saleInfo   SaleInfo
-//   searchInfo SearchInfo
-//   selfLink   String
-//   volumeInfo VolumeInfo
-//   userIDs    String[]   @db.ObjectId
-//   users      User[]     @relation(fields: [userIDs], references: [id])
-//   createdAt  DateTime   @default(now())
-//   updatedAt  DateTime   @default(now())
-// }
+model Book {
+  id              String   @id @map("_id")
+  etag            String
+  kind            String
+  selfLink        String
+  description     String? //Su VolumeInfo
+  smallThumbnail  String? //Su VolumeInfo
+  thumbnail       String? //Su VolumeInfo
+  imageExtraLarge String? //Su VolumeInfo
+  imageLarge      String? //Su VolumeInfo
+  imageMedium     String? //Su VolumeInfo
+  imageSmall      String? //Su VolumeInfo
+  mainCategory    String? //Su VolumeInfo
+  pageCount       Int? //Su VolumeInfo
+  publishedDate   String? //Su VolumeInfo
+  publisher       String? //Su VolumeInfo
+  title           String? //Su VolumeInfo
+  subtitle        String? //Su VolumeInfo
+  // userIDs    String[]   @db.ObjectId
+  // users      User[]     @relation(fields: [userIDs], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+}
