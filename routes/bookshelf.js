@@ -4,7 +4,7 @@ export default async function bookshelf(fastify, opts) {
   fastify.route({
     method: 'POST',
     path: '/bookshelf',
-    handler: onSaveToBookshelf,
+    handler: onSaveBook,
   });
 
   fastify.route({
@@ -12,6 +12,17 @@ export default async function bookshelf(fastify, opts) {
     path: '/bookshelf/:userId',
     handler: onUserBookshelf,
   });
+
+  async function onSaveBook(req, reply) {
+    const body = JSON.parse(req.body);
+    const { book } = body;
+    const bookPersisted = await prisma.book.create({
+      data: {
+        book,
+      },
+    });
+    return bookPersisted;
+  }
 
   async function onSaveToBookshelf(req, reply) {
     return true;
