@@ -1,33 +1,36 @@
 import { PrismaClient } from '@prisma/client';
+import S from 'fluent-json-schema';
 
 export default async function signup(fastify, opts) {
-  const { httpErrors, jwt } = fastify;
   const prisma = new PrismaClient();
 
   fastify.route({
-    method: 'GET',
+    method: 'POST',
     path: '/signup',
     schema: {
-      body: S.object()
-        .additionalProperties(false)
-        .prop('name', S.string().required())
-        .prop('email', S.string().required())
-        .prop('password', S.string().required()),
+      body: S.string(),
+        // .additionalProperties(false)
+        // .prop('email', S.string().required())
+        // .prop('password', S.string().required()),
       response: {
-        200: S.object()
-          .prop('name', S.string())
+        201: S.object()
+          .prop('id', S.string())
           .prop('email', S.string())
           .prop('password', S.string()),
       },
     },
-    handler: onLogin,
+    handler: onSignup,
   });
 
-  async function onLogin(req, reply) {
-    const { name, email, password } = JSON.parse(request.body);
+  async function onSignup(req, reply) {
+    const body = JSON.parse(req.body);
+    console.log("####     BODY  ######: ", body)
+    const { email, password } = body;
+    console.log("####     email  ######: ", email)
+    console.log("####     password  ######: ", password)
+
     const user = await prisma.user.create({
       data: {
-        name,
         email,
         password,
       },
