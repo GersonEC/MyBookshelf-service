@@ -23,7 +23,6 @@ model User {
 model Book {
   id              String   @id @map("_id")
   etag            String
-  kind            String
   selfLink        String
   description     String? //Su VolumeInfo
   smallThumbnail  String? //Su VolumeInfo

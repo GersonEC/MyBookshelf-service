@@ -1,4 +1,7 @@
+import { PrismaClient } from '@prisma/client';
+
 export default async function bookshelf(fastify, opts) {
+  const prisma = new PrismaClient();
   const { httpErrors, jwt } = fastify;
 
   fastify.route({
