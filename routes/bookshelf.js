@@ -20,9 +20,7 @@ export default async function bookshelf(fastify, opts) {
     const body = JSON.parse(req.body);
     const { book } = body;
     const bookPersisted = await prisma.book.create({
-      data: {
-        book,
-      },
+      data: book,
     });
     return bookPersisted;
   }
