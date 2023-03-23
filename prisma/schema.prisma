@@ -14,8 +14,7 @@ model User {
   id        String   @id @default(cuid())
   email     String   @unique
   password  String
-  // bookIDs   String[]
-  // books     Book[]   @relation(fields: [bookIDs], references: [id])
+  books     Book[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -24,21 +23,20 @@ model Book {
   id              String   @id @map("_id")
   etag            String
   selfLink        String
-  description     String? //Su VolumeInfo
-  smallThumbnail  String? //Su VolumeInfo
-  thumbnail       String? //Su VolumeInfo
-  imageExtraLarge String? //Su VolumeInfo
-  imageLarge      String? //Su VolumeInfo
-  imageMedium     String? //Su VolumeInfo
-  imageSmall      String? //Su VolumeInfo
-  mainCategory    String? //Su VolumeInfo
-  pageCount       Int? //Su VolumeInfo
-  publishedDate   String? //Su VolumeInfo
-  publisher       String? //Su VolumeInfo
-  title           String? //Su VolumeInfo
-  subtitle        String? //Su VolumeInfo
-  // userIDs    String[]   @db.ObjectId
-  // users      User[]     @relation(fields: [userIDs], references: [id])
+  description     String?
+  smallThumbnail  String?
+  thumbnail       String?
+  imageExtraLarge String?
+  imageLarge      String?
+  imageMedium     String?
+  imageSmall      String?
+  mainCategory    String?
+  pageCount       Int?
+  publishedDate   String?
+  publisher       String?
+  title           String?
+  subtitle        String?
+  users           User[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now())
 }
