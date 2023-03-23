@@ -1,4 +1,7 @@
+import { PrismaClient } from '@prisma/client';
+
 export default async function signin(fastify, opts) {
+  const prisma = new PrismaClient();
   const { httpErrors, jwt } = fastify;
 
   fastify.route({
@@ -9,7 +12,7 @@ export default async function signin(fastify, opts) {
 
   async function onSignin(req, reply) {
     try {
-      const { email, password } = JSON.parse(request.body);
+      const { email, password } = JSON.parse(req.body);
       const user = await prisma.user.findUnique({
         where: {
           email,
@@ -17,7 +20,7 @@ export default async function signin(fastify, opts) {
       });
       return user;
     } catch (error) {
-      request.log.error(error);
+      req.log.error(error);
       throw new Error(error);
     }
   }
