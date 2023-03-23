@@ -36,14 +36,16 @@ export default async function bookshelf(fastify, opts) {
   }
 
   async function onUserBookshelf(req, reply) {
-    const { userId } = request.params;
-    const books = await prisma.book.findMany({
+    const { userId } = req.params;
+    const result = await prisma.user.findMany({
       where: {
-        userIDs: {
-          has: userId,
-        },
+        id: userId,
+      },
+      select: {
+        books: true,
       },
     });
+    const { books } = result[0];
     return books;
   }
 }
